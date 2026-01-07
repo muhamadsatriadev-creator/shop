@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiaraTechSolution | Premium AdSense Wholesale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --dark: #0f172a;
+            --slate-600: #475569;
+            --whatsapp: #25d366;
+            --blue-gradient: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: #fdfdfd; color: var(--dark); line-height: 1.6; }
+
+        /* Topbar Social */
+        .top-bar { background: var(--dark); padding: 8px 8%; display: flex; justify-content: flex-end; gap: 15px; }
+        .top-bar a { color: white; font-size: 13px; text-decoration: none; opacity: 0.8; transition: 0.3s; }
+        .top-bar a:hover { opacity: 1; color: var(--primary); }
+
+        header { 
+            background: white; padding: 15px 8%; display: flex; justify-content: space-between; 
+            align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #f1f5f9;
+        }
+        .logo { font-weight: 800; font-size: 22px; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+
+        /* Hero */
+        .hero { padding: 60px 8% 40px; text-align: center; }
+        .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; margin-bottom: 15px; letter-spacing: -2px; }
+        .hero p { color: var(--slate-600); max-width: 600px; margin: 0 auto; }
+
+        /* Wholesale Section */
+        .wholesale-section {
+            background: var(--blue-gradient);
+            margin: 40px 8%; padding: 40px; border-radius: 30px; color: white;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+        }
+        .wholesale-info h2 { font-size: 28px; font-weight: 800; margin-bottom: 10px; }
+        .wholesale-info p { opacity: 0.9; font-size: 15px; max-width: 500px; }
+        .btn-wholesale { 
+            background: white; color: var(--primary); padding: 15px 30px; 
+            border-radius: 15px; text-decoration: none; font-weight: 800; transition: 0.3s;
+        }
+        .btn-wholesale:hover { transform: scale(1.05); }
+
+        /* Filter Tab */
+        .filter-container {
+            display: flex; justify-content: center; gap: 10px; margin: 30px auto;
+            padding: 10px 5%; overflow-x: auto; scrollbar-width: none;
+        }
+        .filter-btn {
+            padding: 12px 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 50px;
+            cursor: pointer; font-size: 13px; font-weight: 700; white-space: nowrap; transition: 0.3s;
+        }
+        .filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+
+        /* Grid */
+        .container { padding: 0 8% 100px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+
+        /* Card Modern */
+        .card { 
+            background: white; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column;
+            border: 1px solid #f1f5f9; box-shadow: 0 10px 30px rgba(0,0,0,0.02); transition: 0.4s;
+            position: relative;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+        .card.hidden { display: none; }
+        
+        .badge-type { position: absolute; top: 15px; right: 15px; background: var(--primary); color: white; padding: 5px 12px; border-radius: 10px; font-size: 10px; font-weight: 800; z-index: 2; }
+        .badge-status { position: absolute; top: 15px; left: 15px; background: rgba(15, 23, 42, 0.85); color: white; padding: 5px 12px; border-radius: 10px; font-size: 10px; font-weight: 800; z-index: 2; }
+
+        .image-box { width: 100%; height: 160px; overflow: hidden; background: #f1f5f9; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(0.5); }
+
+        .card-body { padding: 20px; flex-grow: 1; }
+        .product-title { font-size: 18px; font-weight: 800; margin-bottom: 15px; }
+
+        .detail-box { background: #f8fafc; border-radius: 16px; padding: 15px; margin-bottom: 20px; }
+        .detail-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; border-bottom: 1px solid #edf2f7; padding-bottom: 4px; }
+        .detail-row:last-child { border: none; margin: 0; }
+        .label { color: var(--slate-600); }
+        .value { color: var(--dark); font-weight: 700; text-align: right; }
+
+        .price-box { display: flex; justify-content: space-between; align-items: center; }
+        .price { font-size: 20px; font-weight: 800; }
+        .btn-wa { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; transition: 0.3s; }
+
+        footer { background: #fff; padding: 60px 8% 40px; border-top: 1px solid #f1f5f9; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+        .social-icons { display: flex; gap: 10px; margin-top: 20px; }
+        .social-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: 0.3s; font-size: 18px; }
+
+        @media (max-width: 900px) {
+            .wholesale-section { flex-direction: column; text-align: center; gap: 25px; padding: 30px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://wa.me/6281312829555"><i class="fab fa-whatsapp"></i> +62 813-1282-9555</a>
+    </div>
+
+    <header>
+        <div class="logo">TIARATECH<span>SOLUTION</span></div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--primary);"><i class="fas fa-shield-check"></i> OFFICIAL SHOP</div>
+    </header>
+
+    <div class="hero">
+        <h1>Premium AdSense Assets.</h1>
+        <p>Solusi Akun AdSense Terverifikasi, dari Fresh hingga Veteran PO 10x+.</p>
+    </div>
+
+    <div class="wholesale-section">
+        <div class="wholesale-info">
+            <h2><i class="fas fa-layer-group"></i> Paket Borongan (70+ Akun)</h2>
+            <p>Tersedia harga khusus partner untuk pembelian minimal 70 akun. Mix Fresh, PIN, atau PO sesuai kebutuhan stok Anda.</p>
+        </div>
+        <a href="https://wa.me/6281312829555?text=Min, tanya harga borongan minimal 70 akun" class="btn-wholesale">Cek Harga Grosir</a>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterData('all', event)">Semua Stok</button>
+        <button class="filter-btn" onclick="filterData('web', event)">Web Only</button>
+        <button class="filter-btn" onclick="filterData('yt', event)">YouTube Only</button>
+        <button class="filter-btn" onclick="filterData('pin', event)">PIN Ready</button>
+        <button class="filter-btn" onclick="filterData('po', event)">History PO</button>
+    </div>
+
+    <div class="container">
+        <div class="product-grid">
+
+            <div class="card web fresh">
+                <div class="image-box">
+                    <span class="badge-type">WEB</span><span class="badge-status">FRESH</span>
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense Indo Fresh + Site</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Ekstensi Domain</span><span class="value">.COM</span></div>
+                        <div class="detail-row"><span class="label">Registrar</span><span class="value">Niagahoster</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 10.000</span></div>
+                        <div class="detail-row"><span class="label">Tahun</span><span class="value">2024</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 850k</div><a href="https://wa.me/6281312829555?text=Min, beli Web Fresh .COM" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card yt pin">
+                <div class="image-box">
+                    <span class="badge-type">YOUTUBE</span><span class="badge-status">PIN READY</span>
+                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense YT PIN Verified</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Status</span><span class="value">PIN Verified</span></div>
+                        <div class="detail-row"><span class="label">History PO</span><span class="value">Fresh (0x)</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 165.000</span></div>
+                        <div class="detail-row"><span class="label">Tipe</span><span class="value">YT Only</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 1.800k</div><a href="https://wa.me/6281312829555?text=Min, beli YT PIN Ready saldo 165k" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card web po pin">
+                <div class="image-box">
+                    <span class="badge-type">WEB</span><span class="badge-status">PO 1X</span>
+                    <img src="https://images.unsplash.com/photo-1551288049-bbbda5366f7a?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense Web PO 1x</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Ekstensi Domain</span><span class="value">.ID</span></div>
+                        <div class="detail-row"><span class="label">Registrar</span><span class="value">Rumahweb</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 450.000</span></div>
+                        <div class="detail-row"><span class="label">Status</span><span class="value">PIN Verified</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 2.450k</div><a href="https://wa.me/6281312829555?text=Min, beli Web PO 1x .ID" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card web po pin">
+                <div class="image-box">
+                    <span class="badge-type">WEB</span><span class="badge-status">PO 4X</span>
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense Veteran PO 4x</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Ekstensi Domain</span><span class="value">.NET</span></div>
+                        <div class="detail-row"><span class="label">Registrar</span><span class="value">Namecheap</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 1.100.000</span></div>
+                        <div class="detail-row"><span class="label">Tahun Akun</span><span class="value">2021 (Old)</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 4.100k</div><a href="https://wa.me/6281312829555?text=Min, beli Web PO 4x .NET" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card yt po pin">
+                <div class="image-box">
+                    <span class="badge-type">YT ONLY</span><span class="badge-status">PO 3X</span>
+                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">YT Monet PO 3x</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">History</span><span class="value">Gajian 3 Kali</span></div>
+                        <div class="detail-row"><span class="label">Subscribers</span><span class="value">4.500 Active</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 210.000</span></div>
+                        <div class="detail-row"><span class="label">Kesehatan</span><span class="value">Sangat Aman</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 3.800k</div><a href="https://wa.me/6281312829555?text=Min, beli YT PO 3x" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card web po pin">
+                <div class="image-box">
+                    <span class="badge-type">WEB</span><span class="badge-status">PO 10X+</span>
+                    <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">Legendary AdSense Veteran</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Ekstensi Domain</span><span class="value">.COM</span></div>
+                        <div class="detail-row"><span class="label">History PO</span><span class="value">12 Kali</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 2.150.000</span></div>
+                        <div class="detail-row"><span class="label">Trust Level</span><span class="value">High Tier</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 9.500k</div><a href="https://wa.me/6281312829555?text=Min, beli Web Legend PO 10x" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card web fresh">
+                <div class="image-box">
+                    <span class="badge-type">WEB</span><span class="badge-status">FRESH</span>
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense Indo Fresh Biz</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Ekstensi Domain</span><span class="value">.BIZ.ID</span></div>
+                        <div class="detail-row"><span class="label">Registrar</span><span class="value">IDCloudHost</span></div>
+                        <div class="detail-row"><span class="label">PIN</span><span class="value">Belum PIN</span></div>
+                        <div class="detail-row"><span class="label">Saldo</span><span class="value">Rp 5.000</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 750k</div><a href="https://wa.me/6281312829555?text=Min, beli Web Fresh .BIZ.ID" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card yt pin">
+                <div class="image-box">
+                    <span class="badge-type">YT ONLY</span><span class="badge-status">PIN READY</span>
+                    <img src="https://images.unsplash.com/photo-1611162618019-b67482b13ee3?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense YT PIN Fresh</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Status</span><span class="value">PIN Ready</span></div>
+                        <div class="detail-row"><span class="label">History PO</span><span class="value">0x</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 160.000</span></div>
+                        <div class="detail-row"><span class="label">Metode</span><span class="value">Manual PIN</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 1.700k</div><a href="https://wa.me/6281312829555?text=Min, beli YT PIN Fresh saldo 160k" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card web po pin">
+                <div class="image-box">
+                    <span class="badge-type">WEB</span><span class="badge-status">PO 2X</span>
+                    <img src="https://images.unsplash.com/photo-1551288049-bbbda5366f7a?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">AdSense Web PO 2x Org</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Ekstensi Domain</span><span class="value">.ORG</span></div>
+                        <div class="detail-row"><span class="label">Registrar</span><span class="value">Domainesia</span></div>
+                        <div class="detail-row"><span class="label">History PO</span><span class="value">2 Kali</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 520.000</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 3.100k</div><a href="https://wa.me/6281312829555?text=Min, beli Web PO 2x .ORG" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+            <div class="card yt po pin">
+                <div class="image-box">
+                    <span class="badge-type">YT ONLY</span><span class="badge-status">PO 8X</span>
+                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=400" class="card-img">
+                </div>
+                <div class="card-body">
+                    <h3 class="product-title">YT 20k Subs Veteran</h3>
+                    <div class="detail-box">
+                        <div class="detail-row"><span class="label">Subscribers</span><span class="value">20.100+</span></div>
+                        <div class="detail-row"><span class="label">History PO</span><span class="value">8 Kali</span></div>
+                        <div class="detail-row"><span class="label">Saldo Akun</span><span class="value">Rp 1.250.000</span></div>
+                        <div class="detail-row"><span class="label">Niche</span><span class="value">Gaming/Tech</span></div>
+                    </div>
+                    <div class="price-box"><div class="price">Rp 14.500k</div><a href="https://wa.me/6281312829555?text=Min, beli YT 20k Subs PO 8x" class="btn-wa">Beli</a></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="logo">TIARATECH<span>SOLUTION</span></div>
+                <p style="margin-top:15px; color: var(--slate-600); max-width: 450px;">Platform terpercaya untuk jual-beli akun AdSense dan aset digital premium. Keamanan transaksi dan kualitas akun adalah prioritas kami.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" style="background:var(--whatsapp)"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-icon" style="background:var(--telegram)"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#" class="social-icon" style="background:#1877f2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" style="background:#e4405f"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" style="background:#000"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <h4 style="margin-bottom:15px;">Kontak</h4>
+                <p style="font-size:14px; color: var(--slate-600);">WhatsApp: +62 813-1282-9555<br>Email: tiaratechsolution@gmail.com</p>
+                <p style="margin-top: 15px; font-weight: 700; color: var(--primary);">Tiara Tech Solution Center</p>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:50px; font-size:11px; color: #94a3b8; border-top:1px solid #f1f5f9; padding-top:20px;">
+            &copy; 2026 TiaraTechSolution-Shop. Authorized Asset Provider.
+        </div>
+    </footer>
+
+    <script>
+        function filterData(category, event) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
